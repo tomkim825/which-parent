@@ -13,20 +13,13 @@ body{
 
 @media screen and (orientation:landscape) {
   .container{
-    transform: scale(0.5);
+    transform: scale(1.5);
     transform-origin: top;
-
-  }
-body{
-    max-width:96vw;
-    max-height:44vh;
-    overflow:hidden;
   }
   .header{
-    transform: scale(1.1);
+    transform: scale(1.2);
     transform-origin: top;
     height: 14vh;
-    max-width:99vw;
   }
 }
 /* 

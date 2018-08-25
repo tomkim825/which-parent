@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import firebase from './firebase.js';
+import firebase from './config/firebase.js';
 import ImageCompressor from 'image-compressor.js';
 import $ from "jquery";
 import subscriptionkey from './config/subscriptionkey.js'
@@ -130,7 +130,7 @@ console.log(error);
   storage.ref().child(momfile).put(result).then( () =>{
   storage.ref().child(momfile).getDownloadURL().then( url => {
     var momUrl = url;
-    component.setState({  momUrl, results: '**click on circles to upload image**' ,momUploaded:true });
+    component.setState({  momUrl, results: '' ,momUploaded:true });
 
 
     $.ajax({
@@ -171,7 +171,7 @@ console.log(error);
   storage.ref().child(kidfile).put(result).then( () =>{
   storage.ref().child(kidfile).getDownloadURL().then( url => {
     var kidUrl = url;
-    component.setState({  kidUrl,results: '**click on circles to upload image**'  ,kidUploaded:true });
+    component.setState({  kidUrl,results: ''  ,kidUploaded:true });
 
 
     $.ajax({
@@ -211,7 +211,7 @@ console.log(error);
   storage.ref().child(dadfile).put(result).then( () => {
   storage.ref().child(dadfile).getDownloadURL().then( url => {
     var dadUrl = url;
-    component.setState({  dadUrl,  results: '**click on circles to upload image**'  ,dadUploaded:true }); 
+    component.setState({  dadUrl,  results: ''  ,dadUploaded:true }); 
 
     $.ajax({
       url: "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true",
@@ -241,10 +241,10 @@ console.log(error);
       <div className="App">
        <header className="header">
           <h1 className="title">Mom or Dad:</h1>
-          <h5 className="desc">Who do you look like more? </h5>
+          <h5 className="desc">Who do you look more like? </h5>
        </header>
       
-      <div className='container' style={{width:'45vh', maxHeight:'86vh',backgroundColor:'white',color:'black', margin:'0 auto',borderRadius:'10px'}}>
+      <div className='container' style={{backgroundColor:'white',color:'black', margin:'0 auto',borderRadius:'10px'}}>
      
           <input ref={this.inputMomOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeMomFile}/>
                
