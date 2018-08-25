@@ -246,11 +246,11 @@ console.log(error);
       
       <div className='container' style={{backgroundColor:'white',color:'black', margin:'0 auto',borderRadius:'10px'}}>
      
-          <input ref={this.inputMomOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeMomFile}/>
+          <input ref={this.inputMomOpenFileRef} type="file" accept="image/*" capture="camera"  style={{display:"none"}} onChange={this.onChangeMomFile}/>
                
-          <input ref={this.inputChildOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeChildFile}/>
+          <input ref={this.inputChildOpenFileRef} type="file" accept="image/*" capture="camera"  style={{display:"none"}} onChange={this.onChangeChildFile}/>
                     
-          <input ref={this.inputDadOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeDadFile}/>
+          <input ref={this.inputDadOpenFileRef} type="file" accept="image/*" capture="camera"  style={{display:"none"}} onChange={this.onChangeDadFile}/>
         <div className='pictures'>
         <div className='mom'>
           <img id="mom" alt='userimage' src={this.state.momUrl} onClick={this.handleMomClick} style={{ objectFit: 'contain'}}/>
