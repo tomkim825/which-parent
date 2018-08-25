@@ -3,6 +3,7 @@ import './App.css';
 import firebase from './firebase.js';
 import ImageCompressor from 'image-compressor.js';
 import $ from "jquery";
+import subscriptionkey from './config/subscriptionkey.js'
 
 var storage = firebase.storage();
 var momfile;
@@ -56,7 +57,7 @@ class App extends Component {
       beforeSend: function(xhrObj){
           // Request headers
           xhrObj.setRequestHeader("Content-Type","application/json");
-          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","10f397a3144b4015b61663d5d274889c");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",subscriptionkey);
       },
       type: "POST",
       // Request body
@@ -86,7 +87,7 @@ $.ajax({
   beforeSend: function(xhrObj){
       // Request headers
       xhrObj.setRequestHeader("Content-Type","application/json");
-      xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","10f397a3144b4015b61663d5d274889c");
+      xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",subscriptionkey);
   },
   type: "POST",
   // Request body
@@ -137,7 +138,7 @@ console.log(error);
       beforeSend: function(xhrObj){
           // Request headers
           xhrObj.setRequestHeader("Content-Type","application/json");
-          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","10f397a3144b4015b61663d5d274889c");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",subscriptionkey);
       },
       type: "POST",
       // Request body
@@ -178,7 +179,7 @@ console.log(error);
       beforeSend: function(xhrObj){
           // Request headers
           xhrObj.setRequestHeader("Content-Type","application/json");
-          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","10f397a3144b4015b61663d5d274889c");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",subscriptionkey);
       },
       type: "POST",
       // Request body
@@ -217,7 +218,7 @@ console.log(error);
       beforeSend: function(xhrObj){
           // Request headers
           xhrObj.setRequestHeader("Content-Type","application/json");
-          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","10f397a3144b4015b61663d5d274889c");
+          xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key",subscriptionkey);
       },
       type: "POST",
       // Request body
