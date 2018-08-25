@@ -5,6 +5,9 @@ import ImageCompressor from 'image-compressor.js';
 import $ from "jquery";
 
 var storage = firebase.storage();
+var momfile;
+var dadfile;
+var kidfile;
 
 
 class App extends Component {
@@ -63,12 +66,18 @@ class App extends Component {
       }),
   })
   .done( data => {
-    var momResult = data.confidence.toFixed(2)*100 + '%';
+    var momResult = parseInt(data.confidence.toFixed(2)*100) + '% match';
     var momConfidence =data.confidence;
     component.setState({momResult, momConfidence})
+    if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
     if(component.state.dadConfidence > component.state.momConfidence){
       component.setState({kidResult: "Looks more like Dad"})
-    } else{ component.setState({kidResult: "Looks more like Mom"}) }
+    } else{ component.setState({kidResult: "Looks more like Mom"}) } 
+    component.setState({results:'click any circle to try another picture and/or another child'});
+    storage.ref().child(dadfile).delete();
+    storage.ref().child(momfile).delete();
+    storage.ref().child(kidfile).delete();
+  }
   }).fail( error => {
     console.log(error);
 });
@@ -87,33 +96,40 @@ $.ajax({
   }),
 })
 .done( data => {
-var dadResult = data.confidence.toFixed(2)*100 + '%';
+var dadResult = parseInt(data.confidence.toFixed(2)*100) + '% match';
 var dadConfidence =data.confidence;
 component.setState({dadResult,dadConfidence});
-if(component.state.dadConfidence > component.state.momConfidence){
-  component.setState({kidResult: "Looks more like Dad"})
-} else{ component.setState({kidResult: "Looks more like Mom"}) }
+if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
+  if(component.state.dadConfidence > component.state.momConfidence){
+    component.setState({kidResult: "Looks more like Dad"})
+  } else{ component.setState({kidResult: "Looks more like Mom"}) } 
+  component.setState({results:'click any circle to try another picture and/or another child'});
+  storage.ref().child(dadfile).delete();
+  storage.ref().child(momfile).delete();
+  storage.ref().child(kidfile).delete();
+}
 }).fail( error => {
 console.log(error);
 });
   }
 }
 ,this.onChangeMomFile = (event) => {
-  this.setState({momResult: 'UPLOADING'})
+  this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
   event.stopPropagation();
   event.preventDefault();
   var file = event.target.files[0];
-  var filename=file.name;
+  momfile=file.name;
   var component = this;
   
   new ImageCompressor(file, {
     quality: 0.5,
     success(result) {
+      component.setState({  results: 'Uploading'});
 
-  storage.ref().child(filename).put(result).then( () =>{
-  storage.ref().child(filename).getDownloadURL().then( url => {
+  storage.ref().child(momfile).put(result).then( () =>{
+  storage.ref().child(momfile).getDownloadURL().then( url => {
     var momUrl = url;
-    component.setState({  momUrl, momResult:'' ,momUploaded:true });
+    component.setState({  momUrl, results: '**click on circles to upload image**' ,momUploaded:true });
 
 
     $.ajax({
@@ -139,21 +155,22 @@ console.log(error);
   })})     }});
  }
  ,this.onChangeChildFile = (event) => {
-  this.setState({kidResult: 'UPLOADING'})
+  this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
   event.stopPropagation();
   event.preventDefault();
   var file = event.target.files[0];
- var filename=file.name;
+ kidfile=file.name;
  var component = this;
 
  new ImageCompressor(file, {
   quality: 0.5,
   success(result) {
+    component.setState({  results: 'Uploading'});
 
-  storage.ref().child(filename).put(result).then( () =>{
-  storage.ref().child(filename).getDownloadURL().then( url => {
+  storage.ref().child(kidfile).put(result).then( () =>{
+  storage.ref().child(kidfile).getDownloadURL().then( url => {
     var kidUrl = url;
-    component.setState({  kidUrl, kidResult:''  ,kidUploaded:true });
+    component.setState({  kidUrl,results: '**click on circles to upload image**'  ,kidUploaded:true });
 
 
     $.ajax({
@@ -178,21 +195,22 @@ console.log(error);
   })})   }});
  }
  ,this.onChangeDadFile = (event) => {
-     this.setState({dadResult: 'UPLOADING'})
+  this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
   event.stopPropagation();
   event.preventDefault();
   var file = event.target.files[0];
-  var filename=file.name;
+ dadfile=file.name;
  var component = this;
 
  new ImageCompressor(file, {
   quality: 0.5,
   success(result) {
+    component.setState({  results: 'Uploading'});
 
-  storage.ref().child(filename).put(result).then( () => {
-  storage.ref().child(filename).getDownloadURL().then( url => {
+  storage.ref().child(dadfile).put(result).then( () => {
+  storage.ref().child(dadfile).getDownloadURL().then( url => {
     var dadUrl = url;
-    component.setState({  dadUrl,  dadResult:''  ,dadUploaded:true }); 
+    component.setState({  dadUrl,  results: '**click on circles to upload image**'  ,dadUploaded:true }); 
 
     $.ajax({
       url: "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true",
@@ -225,31 +243,33 @@ console.log(error);
           <h5 className="desc">Who do you look like more? </h5>
        </header>
       
-      <div className='container' style={{width:'57vh', maxHeight:'86vh',backgroundColor:'white',color:'black', margin:'0 auto',borderRadius:'10px'}}>
+      <div className='container' style={{width:'45vh', maxHeight:'86vh',backgroundColor:'white',color:'black', margin:'0 auto',borderRadius:'10px'}}>
      
-          <input ref={this.inputMomOpenFileRef} type="file" style={{display:"none"}} onChange={this.onChangeMomFile}/>
+          <input ref={this.inputMomOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeMomFile}/>
                
-          <input ref={this.inputChildOpenFileRef} type="file" style={{display:"none"}} onChange={this.onChangeChildFile}/>
+          <input ref={this.inputChildOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeChildFile}/>
                     
-          <input ref={this.inputDadOpenFileRef} type="file" style={{display:"none"}} onChange={this.onChangeDadFile}/>
-
+          <input ref={this.inputDadOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeDadFile}/>
+        <div className='pictures'>
         <div className='mom'>
-          <img id="mom" alt='userimage' src={this.state.momUrl} onClick={this.handleMomClick} />
+          <img id="mom" alt='userimage' src={this.state.momUrl} onClick={this.handleMomClick} style={{ objectFit: 'contain'}}/>
           <h2 style={{marginTop: '1vmin'}}>Mom</h2>
           <h4>{this.state.momResult}</h4>
         </div>
         <div className='child' >
-          <img id="child" alt='userimage' src={this.state.kidUrl} onClick={this.handleChildClick}/>
+          <img id="child" alt='userimage' src={this.state.kidUrl} onClick={this.handleChildClick} style={{ objectFit: 'contain'}}/>
           <h2 style={{marginTop: '1vmin'}}>Child</h2>
           <h4>{this.state.kidResult}</h4>
         </div>
         <div className='dad'>
-          <img id="dad" alt='userimage' src={this.state.dadUrl} onClick={this.handleDadClick}/>
+          <img id="dad" alt='userimage' src={this.state.dadUrl} onClick={this.handleDadClick} style={{ objectFit: 'contain'}}/>
           <h2 style={{marginTop: '1vmin'}}>Dad</h2>
           <h4>{this.state.dadResult}</h4>
         </div> 
+        </div>
         <div>
         <h3>{this.state.results}</h3>
+        <br/>
         <p>Results generated using Microsoft's facial recogntion software</p>
         <p>analyzing 27 data points. For entertainment purposes only</p>
         </div> 
