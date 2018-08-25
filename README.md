@@ -9,6 +9,10 @@ App can be viewed in portrait mode. When rotated to landscape mode, the view is 
 
 *Please note, the uploaded image is kept anonymous and deleted by Microsoft within 24 hours. 
 
+**Demo**
+
+![which-parent demo gif](/demo.gif)
+
 **Mainpage**
 
 https://tomkim825.github.io/which-parent/
@@ -33,7 +37,3 @@ google account to access firebase,
 **License**
 
 This project is licensed under the MIT License
-
-**Screenshots**
-
-![which-parent demo gif](/demo.gif)
