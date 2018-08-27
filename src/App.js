@@ -24,14 +24,17 @@ class App extends Component {
       momResult: '',
       momFaceId:'',
       momUploaded: false,
+      momBorder: 'gray',
       dadUrl: 'https://tomkim825.github.io/Project1-FaceAPI/assets/images/user-silhouette.png',
       dadResult: '',
       dadFaceId:'',
       dadUploaded: false,
+      dadBorder: 'gray',
       kidUrl: 'https://tomkim825.github.io/Project1-FaceAPI/assets/images/user-silhouette.png',
      kidResult: '',
      kidFaceId:'',
      kidUploaded: false,
+     kidBorder:'gray',
       results: '**click on circles to upload image**',
       momConfidence:'',
       dadConfidence:''
@@ -47,7 +50,7 @@ class App extends Component {
  
 }, this.check = () =>{
   if(this.state.momUploaded &&this.state.kidUploaded&&this.state.dadUploaded){
-    this.setState({results:''})
+    this.setState({results:'Analyzing'})
     var momId = this.state.momFaceId;
     var dadId = this.state.dadFaceId;
     var kidId = this.state.kidFaceId;
@@ -67,7 +70,7 @@ class App extends Component {
       }),
   })
   .done( data => {
-    var momResult = parseInt(data.confidence.toFixed(2)*100) + '% match';
+    var momResult = parseInt(data.confidence.toFixed(2)*100,10) + '% match';
     var momConfidence =data.confidence;
     component.setState({momResult, momConfidence})
     if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
@@ -80,7 +83,7 @@ class App extends Component {
     storage.ref().child(kidfile).delete();
   }
   }).fail( error => {
-    console.log(error);
+    component.setState({results: error});
 });
 $.ajax({
   url: "https://westus.api.cognitive.microsoft.com/face/v1.0/verify",
@@ -97,7 +100,7 @@ $.ajax({
   }),
 })
 .done( data => {
-var dadResult = parseInt(data.confidence.toFixed(2)*100) + '% match';
+var dadResult = parseInt(data.confidence.toFixed(2)*100,10) + '% match';
 var dadConfidence =data.confidence;
 component.setState({dadResult,dadConfidence});
 if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
@@ -110,7 +113,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   storage.ref().child(kidfile).delete();
 }
 }).fail( error => {
-console.log(error);
+  component.setState({results: error});
 });
   }
 }
@@ -130,8 +133,7 @@ console.log(error);
   storage.ref().child(momfile).put(result).then( () =>{
   storage.ref().child(momfile).getDownloadURL().then( url => {
     var momUrl = url;
-    component.setState({  momUrl, results: '' ,momUploaded:true });
-
+    component.setState({  momUrl, results: 'Analyzing' ,momUploaded:true });
 
     $.ajax({
       url: "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true",
@@ -147,13 +149,18 @@ console.log(error);
           }),
   })
   .done( data => {
-        var momFaceId = data[0].faceId;
-       component.setState({momFaceId})
-       component.check();
+      if(data[0] === undefined){  component.setState({ results: 'Face not detected'})}
+      else{var momFaceId = data[0].faceId;
+       component.setState({momFaceId, results: '', momBorder:'black'})
+       component.check()};
 
-  })
+  }) .fail( error => {
+    component.setState({results: error});
+  });
 
-  })})     }});
+  })}).catch(error => {
+    component.setState({results: error});
+   });     }});
  }
  ,this.onChangeChildFile = (event) => {
   this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
@@ -171,7 +178,7 @@ console.log(error);
   storage.ref().child(kidfile).put(result).then( () =>{
   storage.ref().child(kidfile).getDownloadURL().then( url => {
     var kidUrl = url;
-    component.setState({  kidUrl,results: ''  ,kidUploaded:true });
+    component.setState({  kidUrl,results: 'Analyzing'  ,kidUploaded:true });
 
 
     $.ajax({
@@ -188,12 +195,19 @@ console.log(error);
           }),
   })
   .done( data=> {
-        var kidFaceId = data[0].faceId;
-       component.setState({kidFaceId})
-       component.check();
-  })
 
-  })})   }});
+        if(data[0] === undefined){  component.setState({results: 'Face not detected'})}
+       else {
+        var kidFaceId = data[0].faceId;
+        component.setState({kidFaceId,results: '', kidBorder:'black' });
+       component.check();}
+  }) .fail( error => {
+    component.setState({results: error});
+  });
+
+  })}).catch(error => {
+    component.setState({results: error});
+   });   }});
  }
  ,this.onChangeDadFile = (event) => {
   this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
@@ -211,7 +225,7 @@ console.log(error);
   storage.ref().child(dadfile).put(result).then( () => {
   storage.ref().child(dadfile).getDownloadURL().then( url => {
     var dadUrl = url;
-    component.setState({  dadUrl,  results: ''  ,dadUploaded:true }); 
+    component.setState({  dadUrl,  results: 'Analyzing'  ,dadUploaded:true }); 
 
     $.ajax({
       url: "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true",
@@ -227,11 +241,16 @@ console.log(error);
           }),
   })
   .done( data => {
-        var dadFaceId = data[0].faceId;
-       component.setState({dadFaceId})
-       component.check();
-  })
-  })})  }});
+    if(data[0] === undefined){  component.setState({ results: 'Face not detected'})}
+    else{    var dadFaceId = data[0].faceId;
+       component.setState({dadFaceId, results: '', dadBorder:'black' })
+       component.check();}
+  }) .fail( error => {
+    component.setState({results: error});
+  });
+  })}).catch(error => {
+    component.setState({results: error});
+   });  }});
  }
 
   }
@@ -253,17 +272,17 @@ console.log(error);
           <input ref={this.inputDadOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeDadFile}/>
         <div className='pictures'>
         <div className='mom'>
-          <img id="mom" alt='userimage' src={this.state.momUrl} onClick={this.handleMomClick} style={{ objectFit: 'contain'}}/>
+          <img id="mom" alt='userimage' src={this.state.momUrl} onClick={this.handleMomClick} style={{ objectFit: 'contain',borderColor: this.state.momBorder}}/>
           <h2 style={{marginTop: '1vmin'}}>Mom</h2>
           <h4>{this.state.momResult}</h4>
         </div>
         <div className='child' >
-          <img id="child" alt='userimage' src={this.state.kidUrl} onClick={this.handleChildClick} style={{ objectFit: 'contain'}}/>
+          <img id="child" alt='userimage' src={this.state.kidUrl} onClick={this.handleChildClick} style={{ objectFit: 'contain',borderColor:this.state.kidBorder  }}/>
           <h2 style={{marginTop: '1vmin'}}>Child</h2>
           <h4>{this.state.kidResult}</h4>
         </div>
         <div className='dad'>
-          <img id="dad" alt='userimage' src={this.state.dadUrl} onClick={this.handleDadClick} style={{ objectFit: 'contain'}}/>
+          <img id="dad" alt='userimage' src={this.state.dadUrl} onClick={this.handleDadClick} style={{ objectFit: 'contain',borderColor:this.state.dadBorder}}/>
           <h2 style={{marginTop: '1vmin'}}>Dad</h2>
           <h4>{this.state.dadResult}</h4>
         </div> 

@@ -11,7 +11,7 @@ body{
   background-attachment: fixed;
 }
 
-@media screen and (orientation:landscape) {
+/* @media screen and (orientation:landscape) {
   .container{
     transform: scale(0.5);
     transform-origin: top;
@@ -28,7 +28,7 @@ body{
     height: 14vh;
     max-width:99vw;
   }
-}
+} */
 /* 
 @media screen and (orientation:portrait) {
   .App, .header, .container, .title, .desc{
