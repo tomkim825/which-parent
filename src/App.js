@@ -20,17 +20,17 @@ class App extends Component {
       this.inputDadOpenFileRef = React.createRef(),
 
     this.state = {
-      momUrl: 'https://tomkim825.github.io/Project1-FaceAPI/assets/images/user-silhouette.png',
+      momUrl: 'https://github.com/tomkim825/which-parent/blob/master/src/user-silhouette.png?raw=true',
       momResult: '',
       momFaceId:'',
       momUploaded: false,
       momBorder: 'gray',
-      dadUrl: 'https://tomkim825.github.io/Project1-FaceAPI/assets/images/user-silhouette.png',
+      dadUrl: 'https://github.com/tomkim825/which-parent/blob/master/src/user-silhouette.png?raw=true',
       dadResult: '',
       dadFaceId:'',
       dadUploaded: false,
       dadBorder: 'gray',
-      kidUrl: 'https://tomkim825.github.io/Project1-FaceAPI/assets/images/user-silhouette.png',
+      kidUrl: 'https://github.com/tomkim825/which-parent/blob/master/src/user-silhouette.png?raw=true',
      kidResult: '',
      kidFaceId:'',
      kidUploaded: false,
@@ -39,16 +39,10 @@ class App extends Component {
       momConfidence:'',
       dadConfidence:''
     },
-    this.handleMomClick = () => {
-      this.inputMomOpenFileRef.current.click();
-     
-  },this.handleChildClick = () => {
-    this.inputChildOpenFileRef.current.click()
-   
-},this.handleDadClick = () => {
-  this.inputDadOpenFileRef.current.click()
- 
-}, this.check = () =>{
+    this.handleMomClick = () => { this.inputMomOpenFileRef.current.click(); },
+    this.handleChildClick = () => { this.inputChildOpenFileRef.current.click() },
+    this.handleDadClick = () => { this.inputDadOpenFileRef.current.click() },
+    this.check = () =>{
   if(this.state.momUploaded &&this.state.kidUploaded&&this.state.dadUploaded){
     this.setState({results:'Analyzing'})
     var momId = this.state.momFaceId;
@@ -259,11 +253,11 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
     return (
       <div className="App">
        <header className="header">
-          <h1 className="title">Mom or Dad:</h1>
-          <h5 className="desc">Who do you look more like? </h5>
+              <h1 className="title">Mom or Dad:</h1>
+              <h5 className="desc">Who do you look more like? </h5>
        </header>
       
-      <div className='container' style={{backgroundColor:'white',color:'black', margin:'0 auto',borderRadius:'10px'}}>
+      <div className='container' style={{backgroundColor:'white',color:'black', borderRadius:'15px'}}>
      
           <input ref={this.inputMomOpenFileRef} type="file" accept="image/*"  style={{display:"none"}} onChange={this.onChangeMomFile}/>
                

@@ -1,10 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
 
+
+/* #root{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  height:85vh;
+  width: 94vmin;
+  margin: 0 auto;
+  padding-right:0 2vmin;
+  margin-left:-0.5vmin;
+
+} */
+
 .App {
   text-align: center;
   margin: 0 auto;
   width:96vmin;
   font-family: 'Work Sans', sans-serif;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+
 }
 
 .header {
@@ -33,6 +50,7 @@
 .container{
   border-radius: 10px;
   margin:0 auto;
+  width:96vmin;
 }
 
 .pictures{
@@ -109,5 +127,5 @@ p{
   width: 32vmin;
 margin:0 auto;
 background-color: white;
-border-radius: 10px;
+border-radius: 15px;
 }

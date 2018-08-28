@@ -2,13 +2,20 @@
 
 body{
 	font-family: 'Work Sans', sans-serif;
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
   background: linear-gradient(to bottom, #243949 0%, #517fa4 100%);
   height: 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+@media screen and (orientation:portrait) {
+.App{
+  padding-top:8vw;
+}
+.desc{
+  padding-bottom: 4vw;
+}
 }
 
 /* @media screen and (orientation:landscape) {
