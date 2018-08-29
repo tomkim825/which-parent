@@ -68,9 +68,11 @@ class App extends Component {
     var momConfidence =data.confidence;
     component.setState({momResult, momConfidence})
     if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
-    if(component.state.dadConfidence > component.state.momConfidence){
-      component.setState({kidResult: "Looks more like Dad"})
-    } else{ component.setState({kidResult: "Looks more like Mom"}) } 
+      if(component.state.dadConfidence > component.state.momConfidence){
+        component.setState({kidResult: "Looks more like Dad"})
+      } else if(component.state.dadConfidence < component.state.momConfidence){ 
+        component.setState({kidResult: "Looks more like Mom"}) 
+      } else { component.setState({kidResult: "Tie!"}) } 
     component.setState({results:'click any circle to try another picture and/or another child'});
     storage.ref().child(dadfile).delete();
     storage.ref().child(momfile).delete();
@@ -100,7 +102,9 @@ component.setState({dadResult,dadConfidence});
 if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
   if(component.state.dadConfidence > component.state.momConfidence){
     component.setState({kidResult: "Looks more like Dad"})
-  } else{ component.setState({kidResult: "Looks more like Mom"}) } 
+  } else if(component.state.dadConfidence < component.state.momConfidence){ 
+    component.setState({kidResult: "Looks more like Mom"}) 
+  } else { component.setState({kidResult: "Tie!"}) } 
   component.setState({results:'click any circle to try another picture and/or another child'});
   storage.ref().child(dadfile).delete();
   storage.ref().child(momfile).delete();

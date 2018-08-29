@@ -1,11 +1,21 @@
 {
-  "short_name": "Which parent? Mom or Dad",
+  "short_name": "Mom or Dad?",
   "name": "Which parent? Mom or Dad",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "/images/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/images/icon192.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ],
   "start_url": "./index.html",
