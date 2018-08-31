@@ -13,6 +13,7 @@
 
 } */
 
+@media screen and (orientation:landscape) {
 .App {
   text-align: center;
   margin: 0 auto;
@@ -97,7 +98,6 @@ h3{
   text-shadow: 7px 6px 5px rgba(0,0,10,0.2) ;
   clear:both;
   margin:auto;
-
 }
 
 p{
@@ -105,7 +105,6 @@ p{
   color:lightgray;
   font-weight: 300;
   font-size: 1.8vmin;
-
 }
 
 
@@ -129,3 +128,146 @@ margin:0 auto;
 background-color: white;
 border-radius: 15px;
 }
+}
+
+/* portrait & mobile */
+
+@media screen and (orientation: portrait) {
+
+#root{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  height:100vh;
+  width: 100vw;
+  margin: 0;
+  padding:0;
+}
+
+  .App {
+    text-align: center;
+    margin: 0 auto;
+    width:100vw;
+    font-family: 'Work Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+  }
+  
+  .header {
+    background-color: #0336FF;
+    position: absolute;
+    top:0;
+    left:0;
+    padding: 0;
+    min-height: 11vh;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    width:100.5vw;
+    margin: 0;
+  }
+
+  .footer{
+    position:absolute;
+    bottom:0;
+    width: 96vw;
+    margin:0 auto;
+  }
+  
+  .title {
+    font-size: 6vh;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 6px 6px 0px rgba(0,0,50,0.2) ;
+  }
+  
+  .desc{
+    margin:0;
+    font-weight: 300;
+    font-size: 3vh;
+  }
+  
+  .container{
+    margin: auto;
+    width:97.5vw;
+    margin-left: -1vw;
+  }
+  
+  .pictures{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around
+  }
+  
+  
+  h1{
+    font-size: 4vw;
+  }
+  
+  h2{
+    font-size: 4vw;
+    font-weight: 300;
+  }
+  
+  .mom h4, .dad h4{
+    color:orangered;
+    font-size: 6vmin;
+    font-weight: 600;
+    text-shadow: 7px 6px 8px rgba(0,0,10,0.2) ;
+    margin:auto;
+    align-self: center; 
+  }
+  
+  .child h4{
+    vertical-align: middle;
+    text-align:center;
+    color:orangered;
+    padding-top:0.35vh;
+    font-size: 5vw;
+    font-weight: 300;
+    text-shadow: 7px 6px 8px rgba(0,0,10,0.2) ;
+    margin: auto;
+  }
+  
+  h3{
+    padding-top:1.5vmin;
+    font-size: 4vmin;
+    font-weight: 600;
+    color:#0336FF;
+    text-shadow: 7px 6px 5px rgba(0,0,10,0.2) ;
+    clear:both;
+    margin:auto;
+  }
+  
+  p{
+    margin:2px;
+    color:lightgray;
+    font-weight: 300;
+    font-size: 1.8vmin;
+  }
+  
+  
+  #mom, #dad, #child{
+    border-radius: 50%;
+    object-fit: contain;
+    border: 2px solid gray;
+    background:rgb(90,90,92);
+    width: 31vmin;
+    height: 31vmin;
+    margin-top: 3vmin;
+    left:0;
+    -webkit-box-shadow:2px 4px 6px #888888;
+    -moz-box-shadow:2px 4px 6px #888888;
+    box-shadow:2px 4px 6px #888888;
+  }
+  
+  .mom,.dad, .child{
+    width: 32vmin;
+  margin:0 auto;
+  background-color: white;
+  border-radius: 15px;
+  }
+  }
+  

@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
 
+@media screen and (orientation:landscape) {
 body{
 	font-family: 'Work Sans', sans-serif;
   font-family: sans-serif;
@@ -8,12 +9,13 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+}
 
 @media screen and (orientation:portrait) {
-.App{
-  padding-top:8vw;
-}
-.desc{
-  padding-bottom: 8vw;
+body{
+	font-family: 'Work Sans', sans-serif;
+  font-family: sans-serif;
+  background: white;
+  height: 100%;
 }
 }

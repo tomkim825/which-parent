@@ -288,8 +288,10 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
         <div>
         <h3>{this.state.results}</h3>
         <br/>
+        <div className = 'footer'>
         <p>Results generated using Microsoft's facial recogntion software</p>
         <p>analyzing 27 data points. For entertainment purposes only</p>
+        </div>
         </div> 
 
       </div>
