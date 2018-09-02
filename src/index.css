@@ -15,7 +15,7 @@ body{
 body{
 	font-family: 'Work Sans', sans-serif;
   font-family: sans-serif;
-  background: white;
+  background: linear-gradient(to bottom, #243949 0%, #517fa4 100%);
   height: 100%;
   width:96%;
 }

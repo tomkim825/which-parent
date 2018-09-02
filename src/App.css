@@ -139,10 +139,7 @@ border-radius: 15px;
 @media screen and (orientation: portrait) {
 
 #root{
-  /* display:flex;
-  flex-direction: row;
-  align-items: center; */
-  height:95vh;
+  height:100vh;
   margin: 0;
   padding:0;
 }
@@ -159,7 +156,7 @@ border-radius: 15px;
   }
   
   .header {
-    background-color: #0336FF;
+    background-color: black;
     position: absolute;
     top:0;
     left:0;
@@ -198,15 +195,17 @@ border-radius: 15px;
    right:0;
    margin:auto 0;
     width:100%;
-   height: 40vw;
-    bottom:26vw;
-    top:0;
+  /* height: 50vh;  
+   max-height: 55vh; */
+    /* bottom:0; */
+    top:28vh;
   }
   
   .pictures{
     display:flex;
     flex-direction: row;
-    justify-content: space-around
+    justify-content: space-around;
+
   }
   
   
