@@ -16,7 +16,9 @@ body{
 	font-family: 'Work Sans', sans-serif;
   font-family: sans-serif;
   background: linear-gradient(to bottom, #243949 0%, #517fa4 100%);
-  height: 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
   width:96%;
+  overflow-y: hidden;
 }
 }

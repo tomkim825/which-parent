@@ -142,6 +142,7 @@ border-radius: 15px;
   height:100vh;
   margin: 0;
   padding:0;
+  overflow-y: hidden;
 }
 
   .App {
@@ -152,6 +153,7 @@ border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: hidden;
   
   }
   
@@ -242,7 +244,7 @@ border-radius: 15px;
     padding-top:1.5vmin;
     font-size: 4vmin;
     font-weight: 600;
-    color:#0336FF;
+    color:#243949;
     text-shadow: 7px 6px 5px rgba(0,0,10,0.2) ;
     clear:both;
     margin:auto;
