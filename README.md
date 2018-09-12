@@ -1,6 +1,6 @@
 # Which-Parent (aka Mom-or-Dad)
 
-<img src='https://github.com/tomkim825/which-parent/blob/master/store.png?raw=true' style="border:'1px solid black';">
+<img src='https://github.com/tomkim825/which-parent/blob/master/store.png?raw=true' border='black'>
 
 **Published in the Microsoft App store**
 
