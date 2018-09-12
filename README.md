@@ -1,5 +1,10 @@
 # Which-Parent (aka Mom-or-Dad)
 
+**Published in the Microsoft App store**
+
+https://www.microsoft.com/en-us/p/mom-or-dad-which-parent/9ncm6gg7vs7t
+<img src='https://github.com/tomkim825/which-parent/blob/master/store.png?raw=true'>
+
 **Overview**
 
 Any new parent or friends/family of a new parent will have asked the question "Who does the child look like? Mom or Dad?" Sometimes this provides a good debate, but it's hard to get an objective answer. This webapp was created to end the debate.
@@ -39,6 +44,4 @@ google account to access firebase,
 
 This project is licensed under the MIT License
 
-**Published in the Microsoft App store**
 
-https://www.microsoft.com/en-us/p/mom-or-dad-which-parent/9ncm6gg7vs7t
