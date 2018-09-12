@@ -1,9 +1,10 @@
 # Which-Parent (aka Mom-or-Dad)
 
+<img src='https://github.com/tomkim825/which-parent/blob/master/store.png?raw=true' style="border:'1px solid black';">
+
 **Published in the Microsoft App store**
 
 https://www.microsoft.com/en-us/p/mom-or-dad-which-parent/9ncm6gg7vs7t
-<img src='https://github.com/tomkim825/which-parent/blob/master/store.png?raw=true'>
 
 **Overview**
 
