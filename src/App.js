@@ -37,7 +37,8 @@ class App extends Component {
      kidBorder:'gray',
       results: '**click on circles to upload image**',
       momConfidence:'',
-      dadConfidence:''
+      dadConfidence:'',
+      uploadReady:true
     },
     this.handleMomClick = () => { this.inputMomOpenFileRef.current.click(); },
     this.handleChildClick = () => { this.inputChildOpenFileRef.current.click() },
@@ -64,7 +65,7 @@ class App extends Component {
       }),
   })
   .done( data => {
-    var momResult = parseInt(data.confidence.toFixed(2)*100,10) + '% match';
+    var momResult = parseInt(data.confidence.toFixed(2)*100,10) + '% similar';
     var momConfidence =data.confidence;
     component.setState({momResult, momConfidence})
     if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
@@ -96,7 +97,7 @@ $.ajax({
   }),
 })
 .done( data => {
-var dadResult = parseInt(data.confidence.toFixed(2)*100,10) + '% match';
+var dadResult = parseInt(data.confidence.toFixed(2)*100,10) + '% similar';
 var dadConfidence =data.confidence;
 component.setState({dadResult,dadConfidence});
 if((component.state.dadConfidence !=='') &&( component.state.momConfidence !=='')){
@@ -116,7 +117,8 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   }
 }
 ,this.onChangeMomFile = (event) => {
-  this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
+  if(this.state.uploadReady){
+  this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:'',uploadReady:false});
   event.stopPropagation();
   event.preventDefault();
   var file = event.target.files[0];
@@ -149,7 +151,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   .done( data => {
       if(data[0] === undefined){  component.setState({ results: 'Face not detected'})}
       else{var momFaceId = data[0].faceId;
-       component.setState({momFaceId, results: '', momBorder:'black'})
+       component.setState({momFaceId, results: '', momBorder:'black', kidResult:'', uploadReady:true})
        component.check()};
 
   }) .fail( error => {
@@ -159,7 +161,8 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   })}).catch(error => {
     component.setState({results: error});
    });     }});
- }
+ } else {component.setState({kidResult: 'please wait for last picture to finish'})}
+}
  ,this.onChangeChildFile = (event) => {
   this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
   event.stopPropagation();
@@ -261,7 +264,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
               <h5 className="desc">Who do you look more like? </h5>
        </header>
       
-      <div className='container' style={{backgroundColor:'white',color:'black', borderRadius:'15px'}}>
+      <div className='container' style={{backgroundColor:'white'}}>
      
           <input ref={this.inputMomOpenFileRef} type="file" accept="image/*"  style={{display:"none"}} onChange={this.onChangeMomFile}/>
                
@@ -288,9 +291,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
         <div>
         <h3>{this.state.results}</h3>
         <br/>
-  
         </div> 
-
       </div>
       <div className = 'footer'>
         <p>Results generated using Microsoft's facial recogntion software</p>
