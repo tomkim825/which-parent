@@ -63,7 +63,7 @@ h2{
   align-self: center; 
 }
 
-.child h4{
+.child h4, .warning{
   vertical-align: middle;
   text-align:center;
   color:orangered;
@@ -210,7 +210,7 @@ border-radius: 15px;
     align-self: center; 
   }
   
-  .child h4{
+  .child h4, .warning{
     vertical-align: middle;
     text-align:center;
     color:orangered;

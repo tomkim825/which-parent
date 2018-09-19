@@ -38,11 +38,28 @@ class App extends Component {
       results: '**click on circles to upload image**',
       momConfidence:'',
       dadConfidence:'',
-      uploadReady:true
+      uploadReady:true,
+      warning:''
+
     },
-    this.handleMomClick = () => { this.inputMomOpenFileRef.current.click(); },
-    this.handleChildClick = () => { this.inputChildOpenFileRef.current.click() },
-    this.handleDadClick = () => { this.inputDadOpenFileRef.current.click() },
+    this.handleMomClick = () => { 
+      if(this.state.uploadReady){
+        this.setState({warning:'',uploadReady:false})
+      this.inputMomOpenFileRef.current.click(); 
+      } else this.setState({warning:'Please wait for last picture to finish'})
+    },
+    this.handleChildClick = () => { 
+      if(this.state.uploadReady){
+        this.setState({warning:'',uploadReady:false})
+      this.inputChildOpenFileRef.current.click() 
+    } else this.setState({warning:'Please wait for last picture to finish'})
+    },
+    this.handleDadClick = () => { 
+      if(this.state.uploadReady){
+        this.setState({warning:'',uploadReady:false})
+      this.inputDadOpenFileRef.current.click()
+    } else this.setState({warning:'Please wait for last picture to finish'})
+     },
     this.check = () =>{
   if(this.state.momUploaded &&this.state.kidUploaded&&this.state.dadUploaded){
     this.setState({results:'Analyzing'})
@@ -117,8 +134,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   }
 }
 ,this.onChangeMomFile = (event) => {
-  if(this.state.uploadReady){
-  this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:'',uploadReady:false});
+  this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
   event.stopPropagation();
   event.preventDefault();
   var file = event.target.files[0];
@@ -149,9 +165,12 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
           }),
   })
   .done( data => {
-      if(data[0] === undefined){  component.setState({ results: 'Face not detected'})}
+    component.setState({warning:'', uploadReady:true});
+      if(data.length >1 ) {
+        component.setState({ results: 'More than 1 Face detected. Please try new picture'})
+      } else if(data[0] === undefined){  component.setState({ results: 'Face not detected'})}
       else{var momFaceId = data[0].faceId;
-       component.setState({momFaceId, results: '', momBorder:'black', kidResult:'', uploadReady:true})
+       component.setState({momFaceId, results: '', momBorder:'black', kidResult:''})
        component.check()};
 
   }) .fail( error => {
@@ -160,8 +179,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
 
   })}).catch(error => {
     component.setState({results: error});
-   });     }});
- } else {component.setState({kidResult: 'please wait for last picture to finish'})}
+   });     }}); 
 }
  ,this.onChangeChildFile = (event) => {
   this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
@@ -196,8 +214,10 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
           }),
   })
   .done( data=> {
-
-        if(data[0] === undefined){  component.setState({results: 'Face not detected'})}
+    component.setState({warning:'', uploadReady:true});
+    if(data.length >1 ) {
+      component.setState({results: 'More than 1 Face detected. Please try new picture'})
+    } else if(data[0] === undefined){  component.setState({results: 'Face not detected'})}
        else {
         var kidFaceId = data[0].faceId;
         component.setState({kidFaceId,results: '', kidBorder:'black' });
@@ -209,7 +229,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   })}).catch(error => {
     component.setState({results: error});
    });   }});
- }
+}
  ,this.onChangeDadFile = (event) => {
   this.setState({results: 'Compressing Image', momResult:'', dadResult:'',kidResult:''});
   event.stopPropagation();
@@ -242,7 +262,10 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
           }),
   })
   .done( data => {
-    if(data[0] === undefined){  component.setState({ results: 'Face not detected'})}
+    component.setState({warning:'', uploadReady:true});
+    if(data.length >1 ) {
+      component.setState({ kidResult:'', results: 'More than 1 Face detected. Please try new picture'})
+    } if(data[0] === undefined){  component.setState({ results: 'Face not detected'})}
     else{    var dadFaceId = data[0].faceId;
        component.setState({dadFaceId, results: '', dadBorder:'black' })
        component.check();}
@@ -252,7 +275,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   })}).catch(error => {
     component.setState({results: error});
    });  }});
- }
+}
 
   }
 
@@ -289,6 +312,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
         </div> 
         </div>
         <div>
+        <h4  className='warning' >{this.state.warning}</h4>
         <h3>{this.state.results}</h3>
         <br/>
         </div> 
