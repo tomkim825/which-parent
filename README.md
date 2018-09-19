@@ -1,4 +1,14 @@
-# Which-Parent (aka Mom-or-Dad)
+# Mom-or-Dad: Which Parent?
+
+<hr>
+
+<img src='https://github.com/tomkim825/which-parent/blob/master/store.png?raw=true'>
+
+**Published in the Microsoft App store**
+
+https://www.microsoft.com/en-us/p/mom-or-dad-which-parent/9ncm6gg7vs7t
+
+<hr>
 
 **Overview**
 
@@ -38,3 +48,5 @@ google account to access firebase,
 **License**
 
 This project is licensed under the MIT License
+
+
