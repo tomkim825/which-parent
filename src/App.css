@@ -147,12 +147,15 @@ border-radius: 15px;
     top:0;
     left:0;
     padding: 0;
-    min-height: 11vh;
+    min-height: 8vh;
     vertical-align: middle;
     text-align: center;
     color: white;
     width:100%;
     margin: 0;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+    box-shadow: 0 8px 6px -6px black;
   }
 
   .footer{
@@ -163,7 +166,7 @@ border-radius: 15px;
   }
   
   .title {
-    font-size: 6vh;
+    font-size: 4vh;
     font-weight: 600;
     margin: 0;
     text-shadow: 6px 6px 0px rgba(0,0,50,0.2) ;
@@ -172,7 +175,7 @@ border-radius: 15px;
   .desc{
     margin:0;
     font-weight: 300;
-    font-size: 3vh;
+    font-size: 2vh;
   }
   
   .container{
