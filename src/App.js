@@ -281,47 +281,7 @@ if((component.state.dadConfidence !=='') &&( component.state.momConfidence !==''
   render() {
     return (
       <div className="App">
-        <header className="header">
-                <h1 className="title">Mom or Dad:</h1>
-                <h5 className="desc">Who do you look more like? </h5>
-        </header>
-        
-        <div className='container' style={{backgroundColor:'white'}}>
-      
-            <input ref={this.inputMomOpenFileRef} type="file" accept="image/*"  style={{display:"none"}} onChange={this.onChangeMomFile}/>
-            <input ref={this.inputChildOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeChildFile}/>          
-            <input ref={this.inputDadOpenFileRef} type="file" accept="image/*" style={{display:"none"}} onChange={this.onChangeDadFile}/>
-            
-          <div className='pictures'>
-            <div className='mom'>
-              <img id="mom" alt='userimage' src={this.state.momUrl} onClick={this.handleMomClick} style={{ objectFit: 'contain',borderColor: this.state.momBorder}}/>
-              <h2 style={{marginTop: '1vmin'}}>Mom</h2>
-              <h4>{this.state.momResult}</h4>
-            </div>
-            <div className='child' >
-              <img id="child" alt='userimage' src={this.state.kidUrl} onClick={this.handleChildClick} style={{ objectFit: 'contain',borderColor:this.state.kidBorder  }}/>
-              <h2 style={{marginTop: '1vmin'}}>Child</h2>
-              <h4>{this.state.kidResult}</h4>
-            </div>
-            <div className='dad'>
-              <img id="dad" alt='userimage' src={this.state.dadUrl} onClick={this.handleDadClick} style={{ objectFit: 'contain',borderColor:this.state.dadBorder}}/>
-              <h2 style={{marginTop: '1vmin'}}>Dad</h2>
-              <h4>{this.state.dadResult}</h4>
-            </div> 
-          </div>
-
-          <div>
-          <h4  className='warning' >{this.state.warning}</h4>
-          <h3>{this.state.results}</h3>
-          <br/>
-          </div>
-
-        </div>
-
-        <div className = 'footer'>
-          <p>Results generated using Microsoft's facial recogntion software</p>
-          <p>analyzing 27 data points. For entertainment purposes only</p>
-        </div>
+        Thank you for using this app. Unfortunately, the facial recognition feature is no longer available and this app will no longer work. It was been removed from the app store. Please delete this app. Sorry for the inconvenience
 
       </div>
     );
